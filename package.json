@@ -1,0 +1,24 @@
+{
+  "name": "camping-store-backend",
+  "version": "1.0.0",
+  "description": "express backend for Full Stack MERN Ecommerce App - Camping Store",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index",
+    "dev": "npm run start-mongo-server && npm run server",
+    "start-mongo-server": "sudo systemctl start mongod",
+    "stop-mongo-server": "sudo systemctl stop mongod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
