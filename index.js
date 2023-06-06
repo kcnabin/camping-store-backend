@@ -9,6 +9,7 @@ const home = require("./routes/home");
 const errorHandler = require("./routes/errorHandler");
 const unknownRoute = require("./routes/unknownRoute");
 const register = require("./routes/register");
+const login = require("./routes/login");
 
 const connectToDb = async () => {
   try {
@@ -29,6 +30,7 @@ app.use(morgan("dev"));
 
 app.use("/", home);
 app.use("/register", register);
+app.use("/login", login);
 
 app.use(unknownRoute);
 app.use(errorHandler);

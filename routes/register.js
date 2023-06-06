@@ -7,9 +7,12 @@ register.post("/", async (req, res, next) => {
   console.log("req.body :", req.body);
   const { name, email, password } = req.body;
 
+  if (!name || !email || !password) {
+    return next(new Error("All fields are necessary!"));
+  }
+
   try {
     const user = await UserModel.findOne({ email });
-    console.log("user :", user);
     if (user) {
       return next(new Error("User already registered!"));
     }
