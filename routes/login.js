@@ -35,6 +35,10 @@ login.post("/", async (req, res, next) => {
 
     res.json({
       token,
+      user: {
+        name: user.name,
+        isAdmin: user.isAdmin,
+      },
     });
   } catch (error) {
     return next(error);

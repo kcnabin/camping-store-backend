@@ -4,7 +4,6 @@ const UserModel = require("../models/UserModel");
 const register = require("express").Router();
 
 register.post("/", async (req, res, next) => {
-  console.log("req.body :", req.body);
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {

@@ -6,10 +6,11 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 
 const home = require("./routes/home");
-const errorHandler = require("./routes/errorHandler");
+const errorHandler = require("./middleware/errorHandler");
 const unknownRoute = require("./routes/unknownRoute");
 const register = require("./routes/register");
 const login = require("./routes/login");
+const adminCheck = require("./routes/adminCheck");
 
 const connectToDb = async () => {
   try {
@@ -29,8 +30,9 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use("/", home);
-app.use("/register", register);
-app.use("/login", login);
+app.use("/api/register", register);
+app.use("/api/login", login);
+app.use("/api/admin-check", adminCheck);
 
 app.use(unknownRoute);
 app.use(errorHandler);
