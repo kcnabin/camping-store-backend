@@ -10,7 +10,8 @@ const errorHandler = require("./middleware/errorHandler");
 const unknownRoute = require("./routes/unknownRoute");
 const register = require("./routes/register");
 const login = require("./routes/login");
-const adminCheck = require("./routes/adminCheck");
+const adminAuth = require("./routes/adminAuth");
+const userAuth = require("./routes/userAuth");
 
 const connectToDb = async () => {
   try {
@@ -32,11 +33,12 @@ app.use(morgan("dev"));
 app.use("/", home);
 app.use("/api/register", register);
 app.use("/api/login", login);
-app.use("/api/admin-check", adminCheck);
+app.use("/api/admin-auth", adminAuth);
+app.use("/api/user-auth", userAuth);
 
 app.use(unknownRoute);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`---Server running at port ${PORT}`);
+  console.log(`---Server running at port ${PORT}---`);
 });

@@ -10,7 +10,6 @@ const requiresSignIn = async (req, res, next) => {
 
   try {
     const dToken = await jwt.verify(token, process.env.JWT_KEY);
-    console.log("dToken :", dToken);
     req.dToken = dToken;
     next();
   } catch (error) {

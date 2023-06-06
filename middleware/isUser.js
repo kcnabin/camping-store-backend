@@ -1,21 +1,22 @@
 const UserModel = require("../models/UserModel");
 
-const isAdmin = async (req, res, next) => {
+const isUser = async (req, res, next) => {
   const { userId } = req.dToken;
 
   try {
     const user = await UserModel.findOne({ _id: userId });
+
     if (!user) {
-      return next(new Error("Invalid User ID"));
+      return next(new Error("Invalid User"));
     }
 
-    if (!user.isAdmin) {
-      return next(new Error("Admin Only!"));
+    if (user.isAdmin) {
+      return next(new Error("User Only!"));
     }
     next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 };
 
-module.exports = { isAdmin };
+module.exports = isUser;
