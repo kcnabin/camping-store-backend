@@ -12,6 +12,7 @@ const register = require("./routes/register");
 const login = require("./routes/login");
 const adminAuth = require("./routes/adminAuth");
 const userAuth = require("./routes/userAuth");
+const userInfo = require("./routes/userInfo");
 
 const connectToDb = async () => {
   try {
@@ -35,6 +36,7 @@ app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/admin-auth", adminAuth);
 app.use("/api/user-auth", userAuth);
+app.use("/api/user-info", userInfo);
 
 app.use(unknownRoute);
 app.use(errorHandler);
