@@ -13,6 +13,7 @@ const login = require("./routes/login");
 const adminAuth = require("./routes/adminAuth");
 const userAuth = require("./routes/userAuth");
 const userInfo = require("./routes/userInfo");
+const category = require("./routes/category");
 
 const connectToDb = async () => {
   try {
@@ -37,6 +38,7 @@ app.use("/api/login", login);
 app.use("/api/admin-auth", adminAuth);
 app.use("/api/user-auth", userAuth);
 app.use("/api/user-info", userInfo);
+app.use("/api/category", category);
 
 app.use(unknownRoute);
 app.use(errorHandler);
