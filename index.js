@@ -14,6 +14,8 @@ const adminAuth = require("./routes/adminAuth");
 const userAuth = require("./routes/userAuth");
 const userInfo = require("./routes/userInfo");
 const category = require("./routes/category");
+const uploadPhotos = require("./routes/uploadPhotos");
+const products = require("./routes/products");
 
 const connectToDb = async () => {
   try {
@@ -39,6 +41,9 @@ app.use("/api/admin-auth", adminAuth);
 app.use("/api/user-auth", userAuth);
 app.use("/api/user-info", userInfo);
 app.use("/api/category", category);
+app.use("/api/products", products);
+app.use("/api/upload-photos", uploadPhotos);
+app.use("/products", express.static(__dirname + "/products"));
 
 app.use(unknownRoute);
 app.use(errorHandler);

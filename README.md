@@ -1,1 +1,1 @@
-Express backend for Full Stack MERN Ecommerce App - Camping Store
+Express backend for Full Stack MERN App - Camping Store (E-commerce App)

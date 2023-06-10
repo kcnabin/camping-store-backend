@@ -13,6 +13,14 @@ const requiresSignIn = async (req, res, next) => {
     req.dToken = dToken;
     next();
   } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      return next(new Error("Session Expired. Token Expired."));
+    }
+
+    if (error.name === "JsonWebTokenError") {
+      return next(new Error("Invalid Token"));
+    }
+
     return next(error);
   }
 };
