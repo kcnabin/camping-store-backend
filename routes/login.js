@@ -30,7 +30,7 @@ login.post("/", async (req, res, next) => {
     }
 
     const token = jwt.sign({ userId: user._id.toString() }, JWT_KEY, {
-      expiresIn: "1h",
+      expiresIn: "3h",
     });
 
     res.json({

@@ -37,4 +37,79 @@ products.post("/add", requiresSignIn, isAdmin, async (req, res, next) => {
   }
 });
 
+products.get("/all/:page", async (req, res, next) => {
+  const perPage = 4;
+
+  const { page } = req.params;
+  if (!page) {
+    page = 1;
+  }
+  console.log("page :", page);
+
+  try {
+    const products = await ProductModel.find({})
+      .skip((Number(page) - 1) * perPage)
+      .limit(perPage);
+
+    const total = await ProductModel.estimatedDocumentCount();
+    res.json({
+      products,
+      total,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+products.get("/:pId", async (req, res, next) => {
+  const { pId } = req.params;
+  try {
+    const product = await ProductModel.findById(pId);
+    res.json(product);
+  } catch (error) {
+    return next(error);
+  }
+});
+
+products.put("/:pId", requiresSignIn, isAdmin, async (req, res, next) => {
+  const { pId } = req.params;
+
+  const {
+    category,
+    name,
+    brand,
+    size,
+    color,
+    price,
+    discount,
+    photos,
+    descriptions,
+  } = req.body;
+
+  const productToUpdate = {
+    category,
+    name,
+    brand,
+    size,
+    color,
+    price,
+    discount: Number(discount),
+    photos,
+    descriptions,
+  };
+
+  try {
+    const updatedProduct = await ProductModel.findByIdAndUpdate(
+      pId,
+      productToUpdate,
+      {
+        new: true,
+      }
+    );
+    res.json(updatedProduct);
+  } catch (error) {
+    return next(error);
+  }
+});
+
 module.exports = products;
