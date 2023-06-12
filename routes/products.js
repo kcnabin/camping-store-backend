@@ -7,6 +7,7 @@ const products = require("express").Router();
 products.post("/add", requiresSignIn, isAdmin, async (req, res, next) => {
   const {
     category,
+    categoryId,
     name,
     brand,
     size,
@@ -19,6 +20,7 @@ products.post("/add", requiresSignIn, isAdmin, async (req, res, next) => {
 
   const productObject = new ProductModel({
     category,
+    categoryId,
     name,
     brand,
     size,
@@ -64,7 +66,7 @@ products.get("/all/:page", async (req, res, next) => {
 products.get("/:pId", async (req, res, next) => {
   const { pId } = req.params;
   try {
-    const product = await ProductModel.findById(pId);
+    const product = await ProductModel.findById(pId).populate("categoryId");
     res.json(product);
   } catch (error) {
     return next(error);
@@ -76,6 +78,7 @@ products.put("/:pId", requiresSignIn, isAdmin, async (req, res, next) => {
 
   const {
     category,
+    categoryId,
     name,
     brand,
     size,
@@ -88,6 +91,7 @@ products.put("/:pId", requiresSignIn, isAdmin, async (req, res, next) => {
 
   const productToUpdate = {
     category,
+    categoryId,
     name,
     brand,
     size,

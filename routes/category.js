@@ -14,7 +14,7 @@ category.post("/", requiresSignIn, isAdmin, async (req, res, next) => {
 
   const newCategory = new CategoryModel({
     name,
-    slug: slugify(name),
+    slug: slugify(name.toLowerCase()),
   });
 
   try {

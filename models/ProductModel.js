@@ -6,6 +6,10 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
     name: {
       type: String,
       required: true,
@@ -41,5 +45,5 @@ const ProductSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-module.exports = mongoose.model("Products", ProductSchema);
+const ProductModel = mongoose.model("Products", ProductSchema);
+module.exports = ProductModel;
