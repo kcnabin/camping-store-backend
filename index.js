@@ -16,6 +16,7 @@ const userInfo = require("./routes/userInfo");
 const category = require("./routes/category");
 const uploadPhotos = require("./routes/uploadPhotos");
 const products = require("./routes/products");
+const similarProducts = require("./routes/similarProducts");
 
 const connectToDb = async () => {
   try {
@@ -42,8 +43,9 @@ app.use("/api/user-auth", userAuth);
 app.use("/api/user-info", userInfo);
 app.use("/api/category", category);
 app.use("/api/products", products);
+app.use("/api/similar-products", similarProducts);
 app.use("/api/upload-photos", uploadPhotos);
-app.use("/products", express.static(__dirname + "/products"));
+app.use("/uploads/products", express.static(__dirname + "/uploads/products"));
 
 app.use(unknownRoute);
 app.use(errorHandler);

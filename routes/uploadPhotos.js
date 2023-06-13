@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 
 const upload = multer({
-  dest: path.join(__dirname + "/../products/"),
+  dest: path.join(__dirname + "/../uploads/products/"),
 });
 
 uploadPhotos.post("/", upload.array("photos"), async (req, res, next) => {
