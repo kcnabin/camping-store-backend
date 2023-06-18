@@ -18,6 +18,12 @@ const userSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
     },
+    orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
   },
   { timestamps: true }
 );

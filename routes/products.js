@@ -76,7 +76,7 @@ products.get("/category/:cId", async (req, res, next) => {
 
 products.get("/:pId", async (req, res, next) => {
   const { pId } = req.params;
-  console.log("req.params :", req.params);
+
   try {
     const product = await ProductModel.findById(pId).populate("categoryId");
     res.json(product);

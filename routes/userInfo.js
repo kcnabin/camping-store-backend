@@ -14,7 +14,20 @@ userInfo.get("/", requiresSignIn, async (req, res, next) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      orders: user.orders,
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+userInfo.get("/orders", requiresSignIn, async (req, res, next) => {
+  const { userId } = req.dToken;
+
+  try {
+    const user = await UserModel.findById(userId).populate("orders");
+
+    res.json(user);
   } catch (error) {
     next(error);
   }
