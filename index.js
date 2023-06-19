@@ -18,6 +18,7 @@ const uploadPhotos = require("./routes/uploadPhotos");
 const products = require("./routes/products");
 const similarProducts = require("./routes/similarProducts");
 const order = require("./routes/order");
+const userOrders = require("./routes/userOrders");
 
 const connectToDb = async () => {
   try {
@@ -47,6 +48,7 @@ app.use("/api/products", products);
 app.use("/api/similar-products", similarProducts);
 app.use("/api/upload-photos", uploadPhotos);
 app.use("/api/order", order);
+app.use("/api/user-orders", userOrders);
 
 app.use("/uploads/products", express.static(__dirname + "/uploads/products"));
 

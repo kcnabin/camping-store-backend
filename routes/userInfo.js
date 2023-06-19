@@ -21,16 +21,4 @@ userInfo.get("/", requiresSignIn, async (req, res, next) => {
   }
 });
 
-userInfo.get("/orders", requiresSignIn, async (req, res, next) => {
-  const { userId } = req.dToken;
-
-  try {
-    const user = await UserModel.findById(userId).populate("orders");
-
-    res.json(user);
-  } catch (error) {
-    next(error);
-  }
-});
-
 module.exports = userInfo;

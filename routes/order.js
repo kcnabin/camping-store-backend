@@ -67,7 +67,15 @@ order.get("/:orderId", requiresSignIn, async (req, res, next) => {
   const { userId } = req.dToken;
 
   try {
-    const fetchedOrder = await OrderModel.findOne({ _id: orderId });
+    const fetchedOrder = await OrderModel.findOne({ _id: orderId }).populate([
+      {
+        path: "orderItems",
+        populate: {
+          path: "product",
+        },
+      },
+    ]);
+
     if (!fetchedOrder) {
       return next(new Error("Invalid Order Id"));
     }
