@@ -1,3 +1,4 @@
+const { isAdmin } = require("../middleware/isAdmin");
 const isUser = require("../middleware/isUser");
 const { requiresSignIn } = require("../middleware/requiresSignIn");
 const OrderModel = require("../models/OrderModel");
@@ -33,7 +34,7 @@ order.post("/", requiresSignIn, async (req, res, next) => {
   }
 });
 
-order.put("/:orderId", requiresSignIn, async (req, res, next) => {
+order.put("/:orderId", requiresSignIn, isAdmin, async (req, res, next) => {
   const { orderId } = req.params;
   const { status } = req.body;
 
@@ -85,6 +86,22 @@ order.get("/:orderId", requiresSignIn, async (req, res, next) => {
     }
 
     res.json(fetchedOrder);
+  } catch (error) {
+    return next(error);
+  }
+});
+
+order.get("/", requiresSignIn, isAdmin, async (req, res, next) => {
+  try {
+    const allOrders = await OrderModel.find({}).populate([
+      {
+        path: "orderItems",
+        populate: {
+          path: "product",
+        },
+      },
+    ]);
+    res.json(allOrders);
   } catch (error) {
     return next(error);
   }

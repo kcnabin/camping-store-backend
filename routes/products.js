@@ -128,4 +128,23 @@ products.put("/:pId", requiresSignIn, isAdmin, async (req, res, next) => {
   }
 });
 
+products.get("/random/:number", async (req, res, next) => {
+  let number = Number(req.params.number);
+  if (!number) {
+    number = 4;
+  }
+
+  try {
+    const randomProducts = await ProductModel.aggregate([
+      {
+        $sample: { size: number },
+      },
+    ]);
+
+    res.json(randomProducts);
+  } catch (error) {
+    return next(error);
+  }
+});
+
 module.exports = products;

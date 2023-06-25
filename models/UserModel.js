@@ -24,6 +24,17 @@ const userSchema = new mongoose.Schema(
         ref: "Order",
       },
     ],
+    phoneNum: {
+      type: String,
+    },
+    address: {
+      street: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+    },
   },
   { timestamps: true }
 );
