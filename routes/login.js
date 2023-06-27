@@ -26,11 +26,11 @@ login.post("/", async (req, res, next) => {
     );
 
     if (!isPasswordCorrect) {
-      return next(new Error("Password is incorrect"));
+      return next(new Error("Incorrect Password"));
     }
 
     const token = jwt.sign({ userId: user._id.toString() }, JWT_KEY, {
-      expiresIn: "3h",
+      expiresIn: 3 * 60 * 60,
     });
 
     res.json({

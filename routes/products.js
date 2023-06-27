@@ -40,13 +40,12 @@ products.post("/add", requiresSignIn, isAdmin, async (req, res, next) => {
 });
 
 products.get("/all/:page", async (req, res, next) => {
-  const perPage = 4;
+  const perPage = 8;
 
   const { page } = req.params;
   if (!page) {
     page = 1;
   }
-  console.log("page :", page);
 
   try {
     const products = await ProductModel.find({})
@@ -129,10 +128,11 @@ products.put("/:pId", requiresSignIn, isAdmin, async (req, res, next) => {
 });
 
 products.get("/random/:number", async (req, res, next) => {
-  let number = Number(req.params.number);
+  let number = req.params.number;
   if (!number) {
     number = 4;
   }
+  number = Number(number);
 
   try {
     const randomProducts = await ProductModel.aggregate([
