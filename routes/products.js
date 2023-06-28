@@ -62,17 +62,6 @@ products.get("/all/:page", async (req, res, next) => {
   }
 });
 
-products.get("/category/:cId", async (req, res, next) => {
-  const categoryId = req.params.cId;
-
-  try {
-    const categoryProducts = await ProductModel.find({ categoryId });
-    res.json(categoryProducts);
-  } catch (error) {
-    next(error);
-  }
-});
-
 products.get("/:pId", async (req, res, next) => {
   const { pId } = req.params;
 

@@ -20,6 +20,7 @@ const similarProducts = require("./routes/similarProducts");
 const order = require("./routes/order");
 const userOrders = require("./routes/userOrders");
 const changePassword = require("./routes/changePassword");
+const categoryProducts = require("./routes/categoryProducts");
 
 const connectToDb = async () => {
   try {
@@ -45,6 +46,7 @@ app.use("/api/admin-auth", adminAuth);
 app.use("/api/user-auth", userAuth);
 app.use("/api/user-info", userInfo);
 app.use("/api/category", category);
+app.use("/api/category-products", categoryProducts);
 app.use("/api/products", products);
 app.use("/api/similar-products", similarProducts);
 app.use("/api/upload-photos", uploadPhotos);

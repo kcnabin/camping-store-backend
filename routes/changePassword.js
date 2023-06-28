@@ -7,10 +7,7 @@ const changePassword = require("express").Router();
 
 changePassword.put("/", requiresSignIn, async (req, res, next) => {
   const { userId } = req.dToken;
-
   const { password, newPassword } = req.body;
-  console.log("newPassword :", newPassword);
-  console.log("password :", password);
 
   try {
     const user = await UserModel.findOne({ _id: userId });
