@@ -44,9 +44,7 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "./build")));
 
 // app.use("/", home);
-app.use("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./build/index.html"));
-});
+
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/admin-auth", adminAuth);
@@ -66,6 +64,10 @@ app.use("/uploads/products", express.static(__dirname + "/uploads/products"));
 
 app.use(unknownRoute);
 app.use(errorHandler);
+
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`---Server running at port ${PORT}---`);
