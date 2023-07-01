@@ -4,12 +4,12 @@
   "description": "express backend for Full Stack MERN Ecommerce App - Camping Store",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
     "server": "nodemon index",
     "dev": "npm run start-mongo-server && npm run server",
     "start-mongo-server": "sudo systemctl start mongod",
     "stop-mongo-server": "sudo systemctl stop mongod",
     "app": "npm run dev && npm --prefix ../client run start"
-
   },
   "keywords": [],
   "author": "",

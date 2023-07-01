@@ -22,6 +22,7 @@ const userOrders = require("./routes/userOrders");
 const changePassword = require("./routes/changePassword");
 const categoryProducts = require("./routes/categoryProducts");
 const search = require("./routes/search");
+const path = require("path");
 
 const connectToDb = async () => {
   const dbUrl = process.env.MONGO_ATLAS_URL;
@@ -40,8 +41,12 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
+app.use(express.static(path.join(__dirname, "./build")));
 
-app.use("/", home);
+// app.use("/", home);
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/admin-auth", adminAuth);
