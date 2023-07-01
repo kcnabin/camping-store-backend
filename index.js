@@ -21,6 +21,7 @@ const order = require("./routes/order");
 const userOrders = require("./routes/userOrders");
 const changePassword = require("./routes/changePassword");
 const categoryProducts = require("./routes/categoryProducts");
+const search = require("./routes/search");
 
 const connectToDb = async () => {
   try {
@@ -53,6 +54,7 @@ app.use("/api/upload-photos", uploadPhotos);
 app.use("/api/order", order);
 app.use("/api/user-orders", userOrders);
 app.use("/api/change-password", changePassword);
+app.use("/api/search", search);
 
 app.use("/uploads/products", express.static(__dirname + "/uploads/products"));
 
