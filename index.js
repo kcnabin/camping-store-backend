@@ -24,8 +24,9 @@ const categoryProducts = require("./routes/categoryProducts");
 const search = require("./routes/search");
 
 const connectToDb = async () => {
+  const dbUrl = process.env.MONGO_ATLAS_URL;
   try {
-    await mongoose.connect(process.env.MONGO_URL);
+    await mongoose.connect(dbUrl);
     console.log("---Connected to database---");
   } catch (error) {
     console.log(error);
