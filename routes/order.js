@@ -1,5 +1,5 @@
 const { isAdmin } = require("../middleware/isAdmin");
-const isUser = require("../middleware/isUser");
+const { isAuthorized } = require("../middleware/isAuthorized");
 const { requiresSignIn } = require("../middleware/requiresSignIn");
 const OrderModel = require("../models/OrderModel");
 const UserModel = require("../models/UserModel");
@@ -33,6 +33,27 @@ order.post("/", requiresSignIn, async (req, res, next) => {
     return next(error);
   }
 });
+
+order.put(
+  "/cancel/:orderId",
+  requiresSignIn,
+  isAuthorized,
+  async (req, res, next) => {
+    const { orderId } = req.params;
+
+    try {
+      const order = await OrderModel.findById(orderId);
+      order.status = "cancelled";
+      await order.save();
+
+      res.json({
+        msg: "order cancelled!",
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
 
 order.put("/:orderId", requiresSignIn, isAdmin, async (req, res, next) => {
   const { orderId } = req.params;
@@ -90,6 +111,29 @@ order.get("/:orderId", requiresSignIn, async (req, res, next) => {
     return next(error);
   }
 });
+
+order.get(
+  "/status/:statusName",
+  requiresSignIn,
+  isAdmin,
+  async (req, res, next) => {
+    const { statusName } = req.params;
+
+    try {
+      const allOrders = await OrderModel.find({ status: statusName }).populate([
+        {
+          path: "orderItems",
+          populate: {
+            path: "product",
+          },
+        },
+      ]);
+      res.json(allOrders);
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
 
 order.get("/", requiresSignIn, isAdmin, async (req, res, next) => {
   try {

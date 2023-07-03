@@ -25,7 +25,9 @@ const search = require("./routes/search");
 const path = require("path");
 
 const connectToDb = async () => {
-  const dbUrl = process.env.MONGO_ATLAS_URL;
+  // const dbUrl = process.env.MONGO_ATLAS_URL;
+  const dbUrl = process.env.MONGO_URL;
+
   try {
     await mongoose.connect(dbUrl);
     console.log("---Connected to database---");
